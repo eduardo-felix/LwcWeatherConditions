@@ -11,8 +11,7 @@ public with sharing class WeatherAPI {
             HttpResponse res = h.send(req);
             return res.getBody();            
 
-        } catch (Exception e) {
-            System.debug('ERRROO');
+        } catch (Exception e) {            
             throw new AuraHandledException(e.getMessage());
         }
     }
