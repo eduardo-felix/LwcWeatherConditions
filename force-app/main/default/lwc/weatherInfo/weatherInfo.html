@@ -1,9 +1,19 @@
 <!-- weatherComponent.html -->
 <template>
-    <lightning-card title="Weather Information">
+    <lightning-card icon-name="utility:weather">
         <div class="slds-p-around_medium">
-            <p>Temperature: {temperature} °C</p>
-            <p>Description: {description}</p>
+            <div if:true={city}>
+                <h1 style="font-size: 16px; font-weight: bold;">Wheather in {city}</h1>
+            </div>
+            <div if:true={temperature}>
+                <p>Temperature: {temperature} °C</p>
+            </div>
+            <div if:true={description}>
+                <p>Description: {description}</p>
+            </div>            
+            <div if:true={iconUrl}>
+                <img src={iconUrl} alt="Weather Icon" width="50" height="50" />
+            </div>
         </div>
     </lightning-card>
 </template>

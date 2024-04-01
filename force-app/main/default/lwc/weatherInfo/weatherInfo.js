@@ -10,8 +10,10 @@ export default class WeatherComponent extends LightningElement {
     @api recordId;
     temperature;
     description;
+    iconUrl;
+    city;
 
-    // Fazer uma chamada de fio para buscar o registro atual e o campo BillingCity
+    // Wire para buscar o registro atual e o campo BillingCity
     @wire(getRecord, { recordId: '$recordId', fields })
     wiredRecord({ error, data }) {
         if (data) {
@@ -29,6 +31,9 @@ export default class WeatherComponent extends LightningElement {
                 const data = JSON.parse(result);
                 this.temperature = (data.main.temp - 273.15).toFixed(2); // Convertendo de Kelvin para Celsius
                 this.description = data.weather[0].description;
+                this.city = cityName;
+                const iconCode = data.weather[0].icon;
+                this.iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`;
             })
             .catch(error => {
                 console.error('Erro ao obter dados do clima:', error.message);
