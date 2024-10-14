@@ -17,7 +17,9 @@ export default class WeatherComponent extends LightningElement {
         if (data) {
             const billingCity = getFieldValue(data, 'Account.BillingCity');
             this.fetchWeatherData(billingCity);
-        } else if (error) {
+            console.log(billingCity);
+                         
+        } else if (error) {          
             console.error('Erro ao obter o registro:', JSON.stringify(error));
         }
     }
@@ -26,6 +28,7 @@ export default class WeatherComponent extends LightningElement {
         getWeatherData({ cityName })
             .then(result => {
                 const data = JSON.parse(result);
+                
                 this.temperature = (data.main.temp - 273.15).toFixed(2);
                 this.description = data.weather[0].description;
                 this.city = cityName;
